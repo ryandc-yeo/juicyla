@@ -1,5 +1,6 @@
-const axios = require('axios');
-const fs = require('fs');
+import React from 'react';
+import ReactDOMServer from "react-dom/server";
+import axios from 'axios';
 
 let rest = "Epicuria"; // temp for testing; should eventually get the restaurant from the page it's on!
 
@@ -9,9 +10,9 @@ let period = "";
 
 if(now.getHours() < 11 && now.getHours() > 6) {
     period = periods[0];
-} else if(now.getHours() < 16 && now.getHours() > 10) {
+} else if(now.getHours() < 15 && now.getHours() > 10) {
     period = periods[1];
-} else if(now.getHours() < 21 && now.getHours() > 16) {
+} else if(now.getHours() < 21 && now.getHours() > 15) {
     period = periods[2];
 } else {
     period = periods[3];
@@ -22,9 +23,9 @@ async function request() {
     return JSON.stringify(request.data);
 }
 
-function createTable(data,period,restaurant) {
+function generateData(data,period,restaurant) {
 
-    var table = [];
+    var table = [period];
 
     var p_pattern = null;
 
@@ -117,11 +118,30 @@ function createTable(data,period,restaurant) {
 
     table.push(sect_lens);
     table.push(processed_sec_cont);
+    
+    var finTable = "";
 
-    return table;
+    finTable += '<h1>' + table[0] + '</h1>';
+
+    var numItem = 0;
+
+    for(let i = 0; i < table[1].length; i++) {
+        let current_sect = table[1][i][0]; // ex: Psistaria
+        finTable += '<h2>' + current_sect + '</h2>';
+        finTable += '<ul>';
+        for(let j = 0; j < table[1][i][1]; j++) {
+            finTable += '<li>' + table[2][numItem][0]+ '</li>';
+            numItem++;
+        }
+        finTable += '</ul>';
+    }
+
+    return finTable;
 }
 
-request().then(re => {
-    let z = createTable(re,period,rest);
-    console.log(z);
-});
+export default async function Menu() {
+    request().then(re => {
+        var t = generateData(re,period,rest);
+        console.log(t);
+    });
+}
