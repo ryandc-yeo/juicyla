@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOMServer from "react-dom/server";
 import axios from 'axios';
-
-let rest = "Epicuria"; // temp for testing; should eventually get the restaurant from the page it's on!
+import GetMenu from './get_menu.js';
+import fs from 'fs';
 
 const now = new Date();
 let periods = ['Breakfast','Lunch','Dinner','inv'];
@@ -16,11 +16,6 @@ if(now.getHours() < 11 && now.getHours() > 6) {
     period = periods[2];
 } else {
     period = periods[3];
-}
-
-async function request() {
-    const request = await axios.get('http://menu.dining.ucla.edu/Menus');
-    return JSON.stringify(request.data);
 }
 
 function generateData(data,period,restaurant) {
@@ -139,9 +134,14 @@ function generateData(data,period,restaurant) {
     return finTable;
 }
 
-export default async function Menu() {
-    request().then(re => {
-        var t = generateData(re,period,rest);
-        console.log(t);
-    });
+export default function Menu(rest) {
+    try {
+        GetMenu();
+    } catch {
+        console.log("Failed to get menu.");
+    }
+
+    const menu_data = fs.readFileSync('./menu.txt', 'UTF-8');
+    const d = generateData(menu_data,period,rest);
+    return(d);
 }
