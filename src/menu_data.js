@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOMServer from "react-dom/server";
-import axios from 'axios';
 import GetMenu from './get_menu.js';
-import fs from 'fs';
 
 const now = new Date();
 let periods = ['Breakfast','Lunch','Dinner','inv'];
@@ -136,12 +134,10 @@ function generateData(data,period,restaurant) {
 
 export default function Menu(rest) {
     try {
-        GetMenu();
+        const menu_data = GetMenu();
+        const d = generateData(menu_data,period,rest);
+        return(d);
     } catch {
         console.log("Failed to get menu.");
     }
-
-    const menu_data = fs.readFileSync('./menu.txt', 'UTF-8');
-    const d = generateData(menu_data,period,rest);
-    return(d);
 }
