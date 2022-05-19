@@ -1,20 +1,7 @@
 import React from 'react';
 import ReactDOMServer from "react-dom/server";
 import GetMenu from './get_menu.js';
-
-const now = new Date();
-let periods = ['Breakfast','Lunch','Dinner','inv'];
-let period = "";
-
-if(now.getHours() < 11 && now.getHours() > 6) {
-    period = periods[0];
-} else if(now.getHours() < 15 && now.getHours() > 10) {
-    period = periods[1];
-} else if(now.getHours() < 21 && now.getHours() > 15) {
-    period = periods[2];
-} else {
-    period = periods[3];
-}
+import { get, getDatabase, child, ref, set, onValue } from "firebase/database";
 
 function generateData(data,period,restaurant) {
 
@@ -24,13 +11,13 @@ function generateData(data,period,restaurant) {
 
     switch(period) {
         case 'Breakfast':
-            p_pattern = /<h2 id=\\"page-header\\">Breakfast Menu(.*?)<h2/;
+            p_pattern = /<h2 id="page-header">Breakfast Menu(.*?)<h2/s;
             break;
         case 'Lunch':
-            p_pattern = /<h2 id=\\"page-header\\">Lunch Menu(.*?)<h2/;
+            p_pattern = /<h2 id="page-header">Lunch Menu(.*?)<h2/s;
             break;
         case 'Dinner':
-            p_pattern = /<h2 id=\\"page-header\\">Dinner Menu(.*?)<hr class/;
+            p_pattern = /<h2 id="page-header">Dinner Menu(.*?)<hr class/s;
             break;
     }
 
@@ -46,13 +33,13 @@ function generateData(data,period,restaurant) {
 
     switch(restaurant) {
         case 'Epicuria':
-            r_pattern = /<h3 class=\\"col-header\\">Epicuria(.*?)<h3/;
+            r_pattern = /<h3 class="col-header">Epicuria(.*?)<h3/s;
             break;
         case 'De Neve':
-            r_pattern = /<h3 class=\\"col-header\\">De Neve(.*?)<h3/;
+            r_pattern = /<h3 class="col-header">De Neve(.*?)<h3/s;
             break;
         case 'Bruin Plate':
-            r_pattern = /<h3 class=\\"col-header\\">Bruin Plate(.*?)/;
+            r_pattern = /<h3 class="col-header">Bruin Plate(.*)/s;
             break;
     }
 
@@ -64,13 +51,13 @@ function generateData(data,period,restaurant) {
 
     let restaurant_data = period_data.match(reg_rest)[1];
     
-    const r_sectGet = /<li class=\\"sect-item\\">([A-za-z\s]*)</g; // Get section names
+    const r_sectGet = /<li class="sect-item">([A-za-z\s]*)</gs; // Get section names
 
-    const r_itemGet = /<ul class=\\"item-list\\">[\\r\\n\s]*<li class=\\"menu-item\\">(.*?)<\/ul>/g; // Get section items
-    const r_itemName = /<a class=\\"recipelink\\" href=\\".*?\\">(.*?)<\/a>/g; // Get names in items
+    const r_itemGet = /<ul class="item-list">[rn\s]*<li class="menu-item">(.*?)<\/ul>/gs; // Get section items
+    const r_itemName = /<a class="recipelink" href=".*?">(.*?)<\/a>/gs; // Get names in items
 
-    const r_itemDe = /<div class=\\"item-description-wrapper\\">(.*?)<\/div>/g; // Get descriptions in items part 1
-    const r_itemText = /<div class=\\"tt-description\\">(.*?)<\/div>/; // Get descriptions in items part 2
+    const r_itemDe = /<div class="item-description-wrapper">(.*?)<\/div>/gs; // Get descriptions in items part 1
+    const r_itemText = /<div class="tt-description">(.*?)<\/div>/s; // Get descriptions in items part 2
 
     let sec_names = [...restaurant_data.matchAll(r_sectGet)];
     let processed_sec_names = [];
@@ -79,7 +66,7 @@ function generateData(data,period,restaurant) {
     let processed_sec_cont = [];
 
     for(let i = 0; i < sec_names.length; i++) {
-        let s = sec_names[i][1].replace(/\\r\\n/g,'');
+        let s = sec_names[i][1].replace(/rn/g,'');
         processed_sec_names.push(s.trim());
     }
 
@@ -98,7 +85,7 @@ function generateData(data,period,restaurant) {
             a[0] = item_names[j][1];
 
             if(item_descripts[j][0].match(r_itemText)!=null) {
-                let d = item_descripts[j][0].match(r_itemText)[1].replace(/\\r\\n/g,'');
+                let d = item_descripts[j][0].match(r_itemText)[1].replace(/rn/g,'');
                 a[1] = d.trim();
             }
             else {
@@ -132,17 +119,35 @@ function generateData(data,period,restaurant) {
     return finTable;
 }
 
-export default function Menu(rest) {
+export default function MenuData(rest) {
     try {
-        const menu_data = GetMenu();
-        const d = generateData(menu_data,period,rest);
-        if(d=='inv_p') {
-            return(<div><p>There isn't an active meal period right now.  Please come back later.</p></div>);
+        const now = new Date();
+        let periods = ['Breakfast','Lunch','Dinner','inv'];
+        let period = "";
+
+        if(now.getHours() < 11 && now.getHours() > 6) {
+            period = periods[0];
+        } else if(now.getHours() < 15 && now.getHours() > 10) {
+            period = periods[1];
+        } else if(now.getHours() < 21 && now.getHours() > 15) {
+            period = periods[2];
+        } else {
+            period = periods[3];
         }
-        else if(d=='inv_r') {
-            return(<div><p>This restaurant is invalid.</p></div>);
-        }
-        return(d);
+
+        const ds = GetMenu();
+        const menu_table_ref = ref(getDatabase(), 'menu_table/' + ds +'/'+ period + '/' + rest);
+
+        get(child(ref(getDatabase()), 'menu/' + ds)).then((snapshot) => {
+            const d = generateData(snapshot.val().menu_html,period,rest);
+            set(menu_table_ref, {
+                table: d
+            })
+        }).catch((error) => {
+            console.error(error);
+        });
+
+        return(ds+'/'+period+'/'+rest);
     } catch {
         console.log("Failed to get menu.");
     }

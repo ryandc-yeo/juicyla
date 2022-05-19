@@ -31,9 +31,7 @@ function writeMenu(date_string) {
   const reference = ref(db, 'menu/' + date_string);
 
   get(child(ref(db), 'menu/' + date_string)).then((snapshot) => {
-    if (snapshot.exists()) {
-      return(snapshot.val());
-    } else {
+    if (!snapshot.exists()) {
       request().then(re => {
         set(reference, {
           date: date_string,
@@ -47,5 +45,6 @@ function writeMenu(date_string) {
 }
 
 export default function GetMenu(){
-  return(writeMenu(date_string));
+  writeMenu(date_string);
+  return(date_string);
 }
