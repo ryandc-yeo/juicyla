@@ -136,6 +136,12 @@ export default function Menu(rest) {
     try {
         const menu_data = GetMenu();
         const d = generateData(menu_data,period,rest);
+        if(d=='inv_p') {
+            return(<div><p>There isn't an active meal period right now.  Please come back later.</p></div>);
+        }
+        else if(d=='inv_r') {
+            return(<div><p>This restaurant is invalid.</p></div>);
+        }
         return(d);
     } catch {
         console.log("Failed to get menu.");
