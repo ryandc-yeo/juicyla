@@ -1,13 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './index.css';
 import MenuData from './menu_data.js';
 import { get, getDatabase, child, ref, set, onValue } from "firebase/database";
+import NavBar from './NavBar';
+import Homepage from './Homepage';
+import Register from './Register';
+import Login from './Login';
+import RestaurantPage from './RestaurantPage';
 
 function JuicyLa() {
     return (
         <div>
-            <Menu restaurant="Bruin Plate"/>
+            <Router>            
+                <NavBar/>
+            <Routes>
+                <Route path="/Register" element={<Register/>}/>
+                <Route path="/Login" element={<Login/>}/>
+                <Route path = "/RestaurantPage" element={<RestaurantPage/>}/>
+                <Route path="/" element={<Homepage/>}/>
+            </Routes>
+
+            </Router>
         </div>
     );
 }
