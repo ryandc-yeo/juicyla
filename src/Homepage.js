@@ -15,7 +15,7 @@ function getActivity(diningId) {
         activity = snapshot.val();
     });
     return (activity);
-    
+
 }
 
 function getRating(diningId){
@@ -67,7 +67,7 @@ const Homepage = () => {
 
     // const [name, setName] = useState('Name');
     return (
-        <>
+        <div className='background'>
             <div className='topDivider'>
                 <div className='brand'>
                     JUICYLA
@@ -76,7 +76,7 @@ const Homepage = () => {
                     Current Rankings
                 </div>
                 <div className='podium'>
-                    
+
 
                     <div className='second'
                         id="podiumBoxes"
@@ -103,8 +103,6 @@ const Homepage = () => {
                     <PodiumBox name = {restaurants[2].name}/>
                 </div>
                 </div>
-                
-            
             </div>
 
             <div className='leaderBoard'>
@@ -114,7 +112,7 @@ const Homepage = () => {
                 <h1>fyghj</h1>
                 <h1>fyghj</h1>
             </div>
-        </>
+        </div>
     );
 }
 

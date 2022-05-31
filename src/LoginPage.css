@@ -1,27 +1,129 @@
-body {
-	background-color: #fafafa;
+:root {
+	--bgcolor: #B22F25;
+	--white: #F2F2F0;
+	--darkestRed: #490F0D;
+	--font: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+}
+
+* {
+	font-family: var(--font);
+
+	margin: 0px;
+}
+
+.topDivider {
 	display: flex;
-	justify-content: center;
-	align-content: center;
-	width: 100%;
+	flex-direction: column;
+	justify-content: flex-end;
 	align-items: center;
 	height: 100vh;
 }
 
-.box {
-	border: 1px solid #dfdfdf;
-	background-color: #fff;
+.loginDiv {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	/* background: no-repeat center fixed;
+	background-color: var(--bgcolor);
+	background-image: url("../pexels-alena-darmel-7223306.jpg");
+	background-size: cover; */
 }
 
-.g-btn {
-	width: 100% !important;
-	height: 40px !important;
-	line-height: 40px !important;
-	font-size: 15px !important;
+.background {
+	margin-top: -80px;
+	height: 100vh;
+	background: no-repeat center fixed;
+	/* background-color: var(--bgcolor); */
+	background-image: url("../pexels-alena-darmel-7223306.jpg");
+	background-size: cover;
 }
 
-.g-btn>div,
-.g-btn>div>svg {
-	width: 40px !important;
-	height: 38px !important;
+.info {
+	display: flex;
+	justify-content: space-between;
+}
+
+
+.podiumName {
+	color: black;
+	font-weight: bolder;
+	font-size: 300%;
+}
+
+.brand {
+	margin: -20px;
+	font-weight: bolder;
+	font-size: 700%;
+	color: var(--white);
+	-webkit-text-stroke-width: 2px;
+	-webkit-text-stroke-color: var(--darkestRed);
+	text-shadow: var(--darkestRed) 0 0 5px, var(--darkestRed) 0 0 5px;
+
+}
+
+.status {
+	font-weight: bolder;
+	margin-bottom: 10vh;
+	color: var(--white);
+	text-shadow: var(--darkestRed) 0 0 5px, var(--darkestRed) 0 0 5px;
+
+
+	font-size: 300%;
+
+}
+
+.podium {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: flex-end;
+	margin-bottom: 3vh;
+
+
+}
+
+#podiumBoxes {
+	display: flex;
+	flex-direction: column;
+	margin-left: 20px;
+	margin-right: 20px;
+	background-color: var(--textcolor);
+	border-radius: 20px;
+	width: 370px;
+	padding: 20px;
+
+
+
+
+}
+
+.first {
+	height: 475px;
+
+
+
+}
+
+.second {
+	height: 400px;
+}
+
+.third {
+	height: 350px;
+
+
+}
+
+.summary {
+	justify-self: flex-end;
+	background-color: #490F0D;
+	height: 60%;
+	width: 100%;
+}
+
+.footer {
+	background-color: #B22F25;
 }

@@ -24,7 +24,6 @@ const NavBar = () => {
                 <div className='title'>
                     <Link to='/' style={{ textDecoration: 'none' }}>
                         JUICYLA
-
                     </Link>
                 </div>
                 <div className='ButtonGroup'>
