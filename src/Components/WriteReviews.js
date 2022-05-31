@@ -117,27 +117,27 @@ function WriteReview({ hallName }) {
                             }}
                         />
                     </div>
-                    <div id="buttonHolder">
+                    <div>
                         <div className='review-post-btn'>
-                            <Button
-                                variant="outlined"
-                                sx={{
-                                    color: 'white',
-                                    width: 50,
-                                }}
-                                onClick={() => handleDelete()}
-                            >
-                                Delete
-                            </Button>
-                            <Button
-                                sx={{
-                                    color: 'white',
-                                    width: 50,
-                                }}
-                                variant="outlined"
-                                onClick={() => handleClick()}
-                            >
-                                Post</Button>
+                        <Button
+                            variant="outlined"
+                            sx={{
+                                color: 'white',
+                                width: 50,
+                            }}
+                            onClick={() => handleDelete()}
+                        >
+                            Delete
+                        </Button>
+                        <Button
+                            sx={{
+                                color: 'white',
+                                width: 50,
+                            }}
+                            variant="outlined"
+                            onClick={() => handleClick()}
+                        >
+                            Post</Button>
                     </div>
                     </div>
                 </div>
