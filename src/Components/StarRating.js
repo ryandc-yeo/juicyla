@@ -48,22 +48,22 @@ function StarRating({ hallName, isMealPeriod }) {
 
             <div>
                 <Rating
-                name="simple-controlled"
-                value={rating}
-                onChange={(event, ratingValue) => {
-                    setRating(ratingValue);
-                }}
-            />
-            <Button
-                sx={{
-                    color: 'white',
-                    width: 50,
-                }}
-                variant="outlined"
-                onClick={() => handleClick()}
-            >
-                Vote
-            </Button>
+                    name="simple-controlled"
+                    value={rating}
+                    onChange={(event, ratingValue) => {
+                        setRating(ratingValue);
+                    }}
+                />
+                <Button
+                    sx={{
+                        color: 'white',
+                        width: 50,
+                    }}
+                    variant="outlined"
+                    onClick={() => handleClick()}
+                >
+                    Vote
+                </Button>
             </div>
         </div>
     );

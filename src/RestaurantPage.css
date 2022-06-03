@@ -18,8 +18,8 @@
 
 .times {
     display: flex;
-    padding-top: 2vh; 
-    justify-content: space-between ;
+    padding-top: 2vh;
+    justify-content: space-between;
     width: 40vw !important;
     width: 60%;
 }

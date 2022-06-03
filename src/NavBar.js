@@ -50,67 +50,67 @@ const NavBar = () => {
                 {auth.currentUser.email}{" "}
               </span>
               <Button id="backButton"
-              variant="contained"
-              onClick={handleLogout}
+                variant="contained"
+                onClick={handleLogout}
 
-              sx={{
-                fontFamily: '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serifs',
-                fontWeight: 'bold',
-                fontSize: 15,
-                color: '#EA4033',
-                backgroundColor: "white",
-                '&:hover': {
-                  backgroundColor: 'white',
-                }
-              }}
-            >
-              Sign Out
-            </Button>
+                sx={{
+                  fontFamily: '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serifs',
+                  fontWeight: 'bold',
+                  fontSize: 15,
+                  color: '#EA4033',
+                  backgroundColor: "white",
+                  '&:hover': {
+                    backgroundColor: 'white',
+                  }
+                }}
+              >
+                Sign Out
+              </Button>
             </div>
           ) : (
 
-            
+
             <div className="rightSpace5">
               <Button id="backButton"
-              variant="contained"
-              onClick={
-                () => { navigate('/Signup') }
-              }
-
-              sx={{
-                fontFamily: '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serifs',
-                fontWeight: 'bold',
-                fontSize: 15,
-                right: 20,
-                color: '#F2F2F0',
-                backgroundColor: "#EA4033",
-                '&:hover': {
-                  backgroundColor: '#EA4033',
+                variant="contained"
+                onClick={
+                  () => { navigate('/Signup') }
                 }
-              }}
-            >
-              {" "}
-              Register{" "}
-            </Button>
-            <Button id="backButton"
-              variant="contained"
-              onClick={
-                () => { navigate('/Login') }
-              }
 
-              sx={{
-                fontFamily: '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serifs',
-                fontWeight: 'bold',
-                fontSize: 15,
-                color: '#EA4033',
-                backgroundColor: "white",
-                '&:hover': {
-                  backgroundColor: 'white',
+                sx={{
+                  fontFamily: '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serifs',
+                  fontWeight: 'bold',
+                  fontSize: 15,
+                  right: 20,
+                  color: '#F2F2F0',
+                  backgroundColor: "#EA4033",
+                  '&:hover': {
+                    backgroundColor: '#EA4033',
+                  }
+                }}
+              >
+                {" "}
+                Register{" "}
+              </Button>
+              <Button id="backButton"
+                variant="contained"
+                onClick={
+                  () => { navigate('/Login') }
                 }
-              }}
-            >
-              Sign in
-            </Button>
+
+                sx={{
+                  fontFamily: '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serifs',
+                  fontWeight: 'bold',
+                  fontSize: 15,
+                  color: '#EA4033',
+                  backgroundColor: "white",
+                  '&:hover': {
+                    backgroundColor: 'white',
+                  }
+                }}
+              >
+                Sign in
+              </Button>
             </div>
           )}
         </div>

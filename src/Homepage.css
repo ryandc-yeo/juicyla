@@ -43,14 +43,14 @@
 }
 
 .podiumName-lb {
-	color: black;
-	font-weight: bolder;
-	font-size: 300%;
+    color: black;
+    font-weight: bolder;
+    font-size: 300%;
 }
 
 .brand {
     /* margin: -20px; */
-    
+
     font-weight: bolder;
     font-size: 700%;
     color: var(--white);
@@ -65,7 +65,7 @@
     margin-bottom: 10vh;
     color: var(--white);
     text-shadow: var(--darkestRed) 0 0 5px, var(--darkestRed) 0 0 5px;
-    line-height: 50%; 
+    line-height: 50%;
 
     font-size: 300%;
 }
@@ -111,7 +111,7 @@
 }
 
 .smaller {
-	height: 250px; 
+    height: 250px;
 }
 
 .summary {
@@ -121,20 +121,20 @@
     /*color: var(--white); */
     border-radius: 2%;
     overflow-y: scroll;
-    padding: 2vh; 
+    padding: 2vh;
     bottom: 0;
     /* height: 80%; */
     width: 100%;
 }
 
 .summary-lb {
-	justify-self: flex-end;
-	font-size: 80%;
-	background-color: #dccecc;
-	border-radius: 2%;
-	padding: 2vh; 
-	height: 80%;
-	width: 100%;
+    justify-self: flex-end;
+    font-size: 80%;
+    background-color: #dccecc;
+    border-radius: 2%;
+    padding: 2vh;
+    height: 80%;
+    width: 100%;
 }
 
 h2 {

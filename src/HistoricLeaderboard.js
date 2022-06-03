@@ -4,14 +4,14 @@ import HistoricTable from './Components/HistoricTable';
 import './Homepage.css';
 
 
-const Leaderboard = ({mealperiod}) => {
+const Leaderboard = ({ mealperiod }) => {
     return (
         <>
-            <div  className='podiumName-lb'><center>
+            <div className='podiumName-lb'><center>
                 {mealperiod}</center>
             </div>
             <div className='summary-lb'>
-                <HistoricTable period={mealperiod}/>
+                <HistoricTable period={mealperiod} />
             </div>
         </>
     )
