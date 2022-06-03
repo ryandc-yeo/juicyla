@@ -51,7 +51,7 @@ export default function Restaurant() {
   const isMealPeriod = location.state.isMealPeriod;
   const [liveRating, setLiveRating] = useState(location.state.liveRating);
   const [userArr, setUserArr] = useState([]);
-  
+
   let dbRef = ref(db, 'written reviews' + '/' + diningHallName);
 
   const [show, setShow] = React.useState(false)
@@ -127,13 +127,13 @@ export default function Restaurant() {
               <ReviewRating userArr={userArr} />
             </div>
             <div id="activity">
-            {isMealPeriod ? <>
-              <p>ACTIVITY:</p>
+              {isMealPeriod ? <>
+                <p>ACTIVITY:</p>
                 <ActivityLevel restaurant={diningHallName} />
               </>
-              :
-              <p>No activity level: not a meal period</p>
-            }
+                :
+                <p>No activity level: not a meal period</p>
+              }
             </div>
           </div>
           <div className='times'>

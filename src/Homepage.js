@@ -4,17 +4,16 @@ import './Homepage.css';
 import PodiumBox from './PodiumBox';
 import Leaderboard from './HistoricLeaderboard';
 import Button from '@mui/material/Button';
-import { getDatabase, ref, get, child, set, onValue} from "firebase/database";
+import { getDatabase, ref, get, child, set, onValue } from "firebase/database";
 
-const getMealPeriod =()=>
-    {
-        const now = new Date();
-        let time = now.getHours();
-        console.log(now,time)
-        if ((time < 10 && time >=8) ||(time < 15 && time >=11) || time >= 17 && time < 21){
-             return true
-        }
-        return false
+const getMealPeriod = () => {
+    const now = new Date();
+    let time = now.getHours();
+    console.log(now, time)
+    if ((time < 10 && time >= 8) || (time < 15 && time >= 11) || time >= 17 && time < 21) {
+        return true
+    }
+    return false
 }
 
 const getRating = async (diningId) => {
@@ -74,10 +73,10 @@ const Homepage = () => {
                 });
 
                 const now = new Date();
-                if((now.getHours() == 20 || now.getHours() == 9 || now.getHours() == 14) && now.getMinutes() == 59) {
+                if ((now.getHours() == 20 || now.getHours() == 9 || now.getHours() == 14) && now.getMinutes() == 59) {
                     let high_rank = restaurantTemp[0].name;
                     var mealPeriod;
-                    switch(now.getHours()) {
+                    switch (now.getHours()) {
                         case 9:
                             mealPeriod = 'Breakfast';
                             break;
@@ -98,8 +97,8 @@ const Homepage = () => {
                     })
                 }
             }
-          setRestaurants(restaurantTemp);
-          //console.log("useeffect else?")
+            setRestaurants(restaurantTemp);
+            //console.log("useeffect else?")
 
         }
         getRestaurantData();
@@ -113,71 +112,71 @@ const Homepage = () => {
                     JUICYLA
                 </div>
                 <div className='status'>
-                    {show ? 'Historic Rankings' : 'Current Rankings' }
+                    {show ? 'Historic Rankings' : 'Current Rankings'}
                 </div>
-               <div id="rankingButton">
+                <div id="rankingButton">
                     <Button
-                    variant="contained"
-                    onClick={()=>handleShow()}
-                    sx={{
-                    fontFamily: '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serifs',
-                    fontWeight: 'bold',
-                    fontSize: 15,
-                    bottom:60,
-                    color: 'white',
-                    backgroundColor: "#DC3545",
-                    '&:hover': {
-                      backgroundColor: 'white',
-                      color:"black",
-                    }
-                    }}
-                    >{show ? "Back to Current" : "Historic Rankings" }
+                        variant="contained"
+                        onClick={() => handleShow()}
+                        sx={{
+                            fontFamily: '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serifs',
+                            fontWeight: 'bold',
+                            fontSize: 15,
+                            bottom: 60,
+                            color: 'white',
+                            backgroundColor: "#DC3545",
+                            '&:hover': {
+                                backgroundColor: 'white',
+                                color: "black",
+                            }
+                        }}
+                    >{show ? "Back to Current" : "Historic Rankings"}
                     </Button>
                 </div>
                 {show ? <div className='podium'>
                     <div className='smaller'
                         id="podiumBoxes"
                     >
-                        <Leaderboard mealperiod={'Breakfast'}/>
+                        <Leaderboard mealperiod={'Breakfast'} />
                     </div>
                     <div className='smaller'
                         id='podiumBoxes'
                     >
-                        <Leaderboard mealperiod={'Lunch'}/>
+                        <Leaderboard mealperiod={'Lunch'} />
                     </div>
                     <div className='smaller'
                         id="podiumBoxes"
                     >
-                        <Leaderboard mealperiod={'Dinner'}/>
+                        <Leaderboard mealperiod={'Dinner'} />
                     </div>
-                </div> : 
-                
-                <div className='podium'>
-                    <div className='second'
-                        id="podiumBoxes"
-                        onClick={
-                            () => { navigate('/RestaurantPage', { state: { name: restaurants[1].name, isMealPeriod: mealperiod, liveRating: restaurants[1].rating } }) }
-                        }
-                    >
-                        <PodiumBox name={restaurants[1].name} rating={restaurants[1].rating} mealperiod={mealperiod} />
-                    </div>
-                    <div className='first'
-                        id='podiumBoxes'
-                        onClick={
-                            () => { navigate('/RestaurantPage', { state: { name: restaurants[0].name, isMealPeriod: mealperiod, liveRating: restaurants[0].rating } }) }
-                        }
-                    >
-                        <PodiumBox name={restaurants[0].name} rating={restaurants[0].rating} mealperiod={mealperiod} />
-                    </div>
-                    <div className='third'
-                        id="podiumBoxes"
-                        onClick={
-                            () => { navigate('/RestaurantPage', { state: { name: restaurants[2].name, isMealPeriod: mealperiod, liveRating: restaurants[2].rating } }) }
-                        }
-                    >
-                        <PodiumBox name={restaurants[2].name} rating={restaurants[2].rating} mealperiod={mealperiod} />
-                    </div>
-                </div>}
+                </div> :
+
+                    <div className='podium'>
+                        <div className='second'
+                            id="podiumBoxes"
+                            onClick={
+                                () => { navigate('/RestaurantPage', { state: { name: restaurants[1].name, isMealPeriod: mealperiod, liveRating: restaurants[1].rating } }) }
+                            }
+                        >
+                            <PodiumBox name={restaurants[1].name} rating={restaurants[1].rating} mealperiod={mealperiod} />
+                        </div>
+                        <div className='first'
+                            id='podiumBoxes'
+                            onClick={
+                                () => { navigate('/RestaurantPage', { state: { name: restaurants[0].name, isMealPeriod: mealperiod, liveRating: restaurants[0].rating } }) }
+                            }
+                        >
+                            <PodiumBox name={restaurants[0].name} rating={restaurants[0].rating} mealperiod={mealperiod} />
+                        </div>
+                        <div className='third'
+                            id="podiumBoxes"
+                            onClick={
+                                () => { navigate('/RestaurantPage', { state: { name: restaurants[2].name, isMealPeriod: mealperiod, liveRating: restaurants[2].rating } }) }
+                            }
+                        >
+                            <PodiumBox name={restaurants[2].name} rating={restaurants[2].rating} mealperiod={mealperiod} />
+                        </div>
+                    </div>}
 
 
             </div>
