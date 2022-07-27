@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/juicyla/static/css/main.6af0c262.css",
+    "main.js": "/juicyla/static/js/main.0ed8ab31.js",
+    "static/media/bqmfbsn2fpw51.jpeg": "/juicyla/static/media/bqmfbsn2fpw51.783fdb2026609ba0259a.jpeg",
+    "static/media/pexels-alena-darmel-7223306.jpg": "/juicyla/static/media/pexels-alena-darmel-7223306.226e7769d75cfa9eceb2.jpg",
+    "index.html": "/juicyla/index.html",
+    "main.6af0c262.css.map": "/juicyla/static/css/main.6af0c262.css.map",
+    "main.0ed8ab31.js.map": "/juicyla/static/js/main.0ed8ab31.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6af0c262.css",
+    "static/js/main.0ed8ab31.js"
+  ]
+}
